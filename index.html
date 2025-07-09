@@ -12,42 +12,96 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       background: #003366;
       color: white;
       padding: 1em;
       text-align: center;
+      animation: slideInDown 1s ease-out;
     }
+
     main {
       padding: 2em;
       max-width: 1200px;
       margin: auto;
       background: white;
+      animation: fadeIn 1.5s ease-in;
     }
+
     img {
       display: block;
       max-width: 100%;
       margin: 20px auto;
+      animation: fadeIn 2s ease-in-out;
     }
+
     section {
       margin-bottom: 30px;
+      transition: all 0.5s ease;
     }
+
     h2 {
       color: #004080;
+      transition: color 0.3s ease;
     }
+
     ul {
       padding-left: 20px;
     }
+
+    ul li {
+      margin-bottom: 8px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    ul li:hover {
+      transform: scale(1.03);
+      background-color: #f0f8ff;
+      padding-left: 5px;
+    }
+
     .toggle-section {
       cursor: pointer;
       color: #0066cc;
       text-decoration: underline;
     }
+
+    .toggle-section:hover {
+      color: #003366;
+    }
+
+    .collapsible {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease-out;
+    }
+
+    .collapsible.open {
+      max-height: 500px;
+      transition: max-height 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
   </style>
   <script>
     function toggleVisibility(id) {
       const elem = document.getElementById(id);
-      elem.style.display = elem.style.display === 'none' ? 'block' : 'none';
+      elem.classList.toggle('open');
     }
   </script>
 </head>
@@ -74,7 +128,7 @@
 
   <section>
     <h2 class="toggle-section" onclick="toggleVisibility('fcSpecs')">Flight Controller Specifications (Click to Toggle)</h2>
-    <div id="fcSpecs" style="display:none;">
+    <div id="fcSpecs" class="collapsible">
       <ul>
         <li><strong>Microcontroller:</strong> STM32F405, ARM Cortex-M4 @ 168 MHz</li>
         <li><strong>Firmware:</strong> ArduPilot, PX4</li>
@@ -88,7 +142,7 @@
 
   <section>
     <h2 class="toggle-section" onclick="toggleVisibility('escSpecs')">ESC and Motor Specs (Click to Toggle)</h2>
-    <div id="escSpecs" style="display:none;">
+    <div id="escSpecs" class="collapsible">
       <ul>
         <li><strong>ESC:</strong> 30A continuous current, BLHeli_32 firmware, 7.4V–14.8V</li>
         <li><strong>Motor:</strong> 2212-920KV brushless, max thrust 1200g</li>
