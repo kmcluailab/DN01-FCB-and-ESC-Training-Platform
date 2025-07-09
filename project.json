@@ -1,0 +1,20 @@
+{
+  "project": {
+    "title": "Scientech DN01 – FCB and ESC Training Platform",
+    "description": "The Scientech DN01 is an educational training platform designed to teach the fundamentals of UAV (Unmanned Aerial Vehicle) electronics and control systems. It helps students, educators, and hobbyists understand how drones work by offering hands-on experience with real drone components.\n\nAt the heart of the DN01 is a Flight Controller Board (FCB) based on the STM32F405 ARM Cortex-M4 processor. This controller runs popular open-source drone firmware like ArduPilot and PX4, and supports multiple interfaces such as UART, I2C, SPI, PWM, and USB. It’s compact in size and easy to integrate into different learning setups.\n\nThe platform also includes Electronic Speed Controllers (ESCs) and 2212-920KV brushless motors. The ESCs use BLHeli_32 firmware and can handle 30A of continuous current. They offer precise speed control using PWM signals and are compatible with 9–10 inch propellers, making them perfect for flight training.\n\nImportant sensors like the IMU (accelerometer, gyroscope, magnetometer), GPS, and Barometer are included to support navigation, stability, and altitude hold. These sensors allow learners to experiment with real-time data from actual flight scenarios.\n\nThe DN01 also supports RC (Radio Control) monitoring, where users can analyze signals such as PWM and SBUS, configure transmitter channels, and tune PID values for stable flight.\n\nTraining modules guide users through step-by-step activities including:\n- Pre-flight safety checks\n- ESC calibration\n- Sensor integration\n- Signal monitoring\n- Flight mode setup (Stabilize, AltHold, Loiter, Auto)\n\nThe system works seamlessly with Mission Planner, a graphical interface for configuring the drone, monitoring live data, logging telemetry, and customizing flight parameters.\n\nWhether used in classrooms, labs, or drone workshops, the Scientech DN01 offers a complete and practical learning experience. It is perfect for building foundational knowledge in UAV systems, control theory, and sensor integration.",
+    "keywords": ["UAV", "Drone", "Flight Controller", "ESC", "Training Platform", "Sensor Integration", "ArduPilot", "PX4", "STMicroelectronics", "STMF405"],
+    "author": {
+      "name": "Akash Gupta",
+      "github": "saysky2"
+    },
+    "version": "1.0.0",
+    "license": "MIT",
+    "created_at": "2025-07-09",
+    "resources": {
+      "image": "dn01-removebg-preview.png",
+      "html_page": "index.html",
+      "software": ["Mission Planner", "ArduPilot", "PX4"],
+      "microcontroller": "STM32F405"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DN01 - FCB and ESC Training Platform</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    main {
+      padding: 2em;
+      max-width: 1200px;
+      margin: auto;
+      background: white;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 20px auto;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #004080;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .toggle-section {
+      cursor: pointer;
+      color: #0066cc;
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    function toggleVisibility(id) {
+      const elem = document.getElementById(id);
+      elem.style.display = elem.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>Scientech DN01 - FCB and ESC Training Platform</h1>
+</header>
+
+<main>
+
+  <img src="./DN01-FCB-and-ESC-Training-Platform.png" alt="DN01 Training Platform Image">
+
+  <section>
+    <h2>System Overview</h2>
+    <p>Explore hands-on UAV electronics and control systems through a modular platform. Designed for education and experimentation, this system simplifies learning UAV technologies.</p>
+    <ul>
+      <li><strong>Flight Controller Board (FCB):</strong> Manages flight control and sensor data.</li>
+      <li><strong>Electronic Speed Controllers (ESCs):</strong> Regulate motor speed and ensure precise thrust control.</li>
+      <li><strong>Sensors:</strong> IMU, GPS, and Barometer for navigation and stability.</li>
+      <li><strong>Power Distribution & RC Receiver:</strong> Distributes power and receives pilot commands.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="toggle-section" onclick="toggleVisibility('fcSpecs')">Flight Controller Specifications (Click to Toggle)</h2>
+    <div id="fcSpecs" style="display:none;">
+      <ul>
+        <li><strong>Microcontroller:</strong> STM32F405, ARM Cortex-M4 @ 168 MHz</li>
+        <li><strong>Firmware:</strong> ArduPilot, PX4</li>
+        <li><strong>Interfaces:</strong> UART, I2C, SPI, PWM, USB</li>
+        <li><strong>Memory:</strong> 16 MB Flash</li>
+        <li><strong>Input Voltage:</strong> 5V</li>
+        <li><strong>Dimensions:</strong> 36mm x 36mm</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="toggle-section" onclick="toggleVisibility('escSpecs')">ESC and Motor Specs (Click to Toggle)</h2>
+    <div id="escSpecs" style="display:none;">
+      <ul>
+        <li><strong>ESC:</strong> 30A continuous current, BLHeli_32 firmware, 7.4V–14.8V</li>
+        <li><strong>Motor:</strong> 2212-920KV brushless, max thrust 1200g</li>
+        <li><strong>Compatible Propellers:</strong> 9-10"</li>
+        <li><strong>PWM:</strong> Adjustable 10–490Hz</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Training Modules</h2>
+    <h3>Pre-Flight Checks</h3>
+    <ul>
+      <li>Verify voltage and sensor health</li>
+      <li>Inspect propeller tightness and RC link</li>
+    </ul>
+
+    <h3>ESC Calibration</h3>
+    <ul>
+      <li>Throttle range configuration</li>
+      <li>ESC timing setup</li>
+      <li>Use BLHeli_32 suite for settings</li>
+    </ul>
+
+    <h3>Signal Monitoring</h3>
+    <ul>
+      <li>Analyze PWM, SBUS signals</li>
+      <li>Monitor RC link quality</li>
+    </ul>
+
+    <h3>Sensor Integration</h3>
+    <ul>
+      <li>IMU: Accelerometer, Gyroscope, Magnetometer</li>
+      <li>GPS: Coordinates & Waypoint navigation</li>
+      <li>Barometer: Altitude hold</li>
+    </ul>
+
+    <h3>RC Control & Flight Modes</h3>
+    <ul>
+      <li>Transmitter setup, channel mapping</li>
+      <li>PID tuning and configuration</li>
+      <li>Flight Modes: Stabilize, AltHold, Loiter, Auto</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Software Integration</h2>
+    <ul>
+      <li><strong>Mission Planner:</strong> GUI configuration, telemetry logging, real-time data visualization</li>
+      <li><strong>ArduPilot:</strong> Open-source firmware, customizable flight parameters, large community</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Educational Value</h2>
+    <ul>
+      <li><strong>Assembly & Troubleshooting:</strong> Learn UAV circuit building and issue resolution</li>
+      <li><strong>Programming & PID Tuning:</strong> Develop and fine-tune flight control algorithms</li>
+      <li><strong>Sensor Data & Analysis:</strong> Hands-on with real-time sensor data and flight dynamics</li>
+    </ul>
+  </section>
+
+</main>
+
+</body>
+</html>
