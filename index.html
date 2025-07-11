@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DN01 - FCB and ESC Training Platform</title>
-  <link rel="icon" type="image/png" href="/Khwaja_Moinuddin_Chishti_Language_University_logo.png" />
+  <link rel="icon" type="image/png" href="Khwaja_Moinuddin_Chishti_Language_University_logo.png" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,12 +14,25 @@
       padding: 0;
     }
 
+    /* Logo in top-left corner */
+    .logo-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+
+    .logo-container img {
+      height: 60px;
+    }
+
     header {
       background: #003366;
       color: white;
       padding: 1em;
       text-align: center;
       animation: slideInDown 1s ease-out;
+      position: relative;
     }
 
     main {
@@ -107,6 +120,11 @@
   </script>
 </head>
 <body>
+
+<!-- University logo in top-left -->
+<div class="logo-container">
+  <img src="Khwaja_Moinuddin_Chishti_Language_University_logo.png" alt="University Logo">
+</div>
 
 <header>
   <h1>Scientech DN01 - FCB and ESC Training Platform</h1>
