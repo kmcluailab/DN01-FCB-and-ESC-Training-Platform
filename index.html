@@ -1,22 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF- />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DN01 - FCB and ESC Training Platform</title>
   <link rel="icon" type="image/png" href="Khwaja_Moinuddin_Chishti_Language_University_logo.png" />
   <style>
+    :root {
+      --bg-color: #f5f7fa;
+      --text-color: #333;
+      --header-bg: #283593;
+      --main-bg: #fff;
+      --accent-color: #1a237e;
+      --border-color: #ddd;
+      --shadow-color: rgba(0,0,0,0.2);
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #e0e0e0;
+      --header-bg: #1e1e2e;
+      --main-bg: #2d2d2d;
+      --accent-color: #64b5f6;
+      --border-color: #444;
+      --shadow-color: rgba(0,0,0,0.5);
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f5f7fa;
+      background-color: var(--bg-color);
       margin: 0;
-      padding: 0;
-      color: #333;
-      transition: background 0.3s, color 0.3s;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+
+    .control-btn {
+      background-color: white;
+      color: black;
+      border: 2px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+    }
+
+    .control-btn:hover {
+      background-color: #f5f5f5;
+      border-color: #aaa;
+    }
+
+    .language-select {
+      background-color: white;
+      color: black;
+      border: 2px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
     }
 
     header {
-      background-color: #283593;
+      background-color: var(--header-bg);
       color: white;
       padding: 20px 20px 20px 100px;
       text-align: center;
@@ -31,47 +95,23 @@
       height: 80px;
     }
 
-    #darkToggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 8px 14px;
-      background-color: white;
-      color: #283593;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1.2em;
-    }
-
-    #languageSelect {
-      position: absolute;
-      top: 20px;
-      left: 130px;
-      padding: 6px;
-    }
-
     main {
       max-width: 1200px;
       margin: auto;
       padding: 2em;
-      background-color: #ffffff;
+      background-color: var(--main-bg);
       animation: fadeIn 1.5s ease-in;
-      transition: background-color 0.3s, color 0.3s;
+      margin-bottom: 100px;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-      margin: 20px auto;
-      border-radius: 10px;
-      border: 4px solid #ddd;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    h2 {
+      color: var(--accent-color);
+      margin-top: 40px;
     }
 
-    h2, h3 {
-      color: #1a237e;
+    h3 {
+      color: var(--accent-color);
+      margin-top: 30px;
     }
 
     ul {
@@ -79,21 +119,35 @@
     }
 
     li {
-      margin: 10px 0;
+      margin-bottom: 10px;
       transition: background-color 0.3s ease;
     }
 
     li:hover {
-      background-color: #f0f4ff;
+      background-color: rgba(64, 181, 246, 0.1);
       padding-left: 5px;
+    }
+
+    .image-animated {
+      display: block;
+      max-width: 90%;
+      margin: 30px auto;
+      border-radius: 10px;
+      border: 4px solid var(--border-color);
+      box-shadow: 0 4px 12px var(--shadow-color);
+      animation: fadeInImage 2s ease-in-out;
     }
 
     .toggle {
       cursor: pointer;
-      color: #3949ab;
+      color: var(--accent-color);
       text-decoration: underline;
       margin: 15px 0;
       display: inline-block;
+    }
+
+    .toggle:hover {
+      opacity: 0.8;
     }
 
     .content {
@@ -107,6 +161,32 @@
       transition: max-height 0.9s ease-in;
     }
 
+    .lang-hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: var(--header-bg);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #64b5f6;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInImage {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -116,81 +196,226 @@
       from { transform: translateY(-100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
-    body.dark-mode {
-      background: #121212;
-      color: #e0e0e0;
-    }
-
-    body.dark-mode header {
-      background-color: #1a237e;
-    }
-
-    body.dark-mode #darkToggle {
-      background-color: #333;
-      color: #ffffff;
-    }
-
-    body.dark-mode main {
-      background-color: #1e1e2f;
-    }
-
-    body.dark-mode h2,
-    body.dark-mode h3 {
-      color: #90caf9;
-    }
-
-    body.dark-mode li:hover {
-      background-color: #263238;
-    }
   </style>
+</head>
+<body>
+  <div class="controls">
+    <button class="control-btn" onclick="toggleDarkMode()">🌙 Dark</button>
+    <select class="language-select" onchange="changeLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="ur">اردو</option>
+    </select>
+  </div>
+
+  <header>
+    <p data-lang="en">Khwaja Moinuddin Chishti Language University, Lucknow</p>
+    <p data-lang="hi" class="lang-hidden">ख्वाजा मोइनुद्दीन चिश्ती भाषा विश्वविद्यालय, लखनऊ</p>
+    <p data-lang="ur" class="lang-hidden">خواجہ معین الدین چشتی لینگویج یونیورسٹی، لکھنؤ</p>
+    <img src="Khwaja_Moinuddin_Chishti_Language_University_logo.png" alt="University Logo" class="logo">
+    <h1 data-lang="en">Scientech DN01 - FCB and ESC Training Platform</h1>
+    <h1 data-lang="hi" class="lang-hidden">साइंटेक DN01 - एफसीबी और ईएससी प्रशिक्षण प्लेटफ़ॉर्म</h1>
+    <h1 data-lang="ur" class="lang-hidden">سائنٹیک DN01 - ایف سی بی اور ای ایس سی تربیتی پلیٹ فارم</h1>
+    
+    <p data-lang="en">Advanced UAV Electronics and Control Systems Training</p>
+    <p data-lang="hi" class="lang-hidden">उन्नत यूएवी इलेक्ट्रॉनिक्स और नियंत्रण प्रणाली प्रशिक्षण</p>
+    <p data-lang="ur" class="lang-hidden">جدید UAV الیکٹرانکس اور کنٹرول سسٹم کی تربیت</p>
+  </header>
+
+  <main>
+    <img src="./DN01-FCB-and-ESC-Training-Platform.png" alt="DN01 Training Platform" class="image-animated">
+
+    <section>
+      <h2 data-lang="en">System Overview</h2>
+      <h2 data-lang="hi" class="lang-hidden">सिस्टम अवलोकन</h2>
+      <h2 data-lang="ur" class="lang-hidden">نظام کا جائزہ</h2>
+      
+      <p data-lang="en">Explore hands-on UAV electronics and control systems through a modular platform. Designed for education and experimentation, this system simplifies learning UAV technologies.</p>
+      <p data-lang="hi" class="lang-hidden">एक मॉड्यूलर प्लेटफ़ॉर्म के माध्यम से यूएवी इलेक्ट्रॉनिक्स और नियंत्रण प्रणाली का व्यावहारिक अनुभव प्राप्त करें। यह शैक्षणिक और प्रयोगात्मक उद्देश्यों के लिए डिज़ाइन किया गया है।</p>
+      <p data-lang="ur" class="lang-hidden">ایک ماڈیولر پلیٹ فارم کے ذریعے UAV الیکٹرانکس اور کنٹرول سسٹمز کا عملی تجربہ حاصل کریں۔ تعلیمی اور تجرباتی مقاصد کے لیے تیار کیا گیا۔</p>
+      
+      <ul data-lang="en">
+        <li>Flight Controller Board (FCB): Manages flight control and sensor data</li>
+        <li>Electronic Speed Controllers (ESCs): Regulate motor speed and ensure precise thrust control</li>
+        <li>Sensors: IMU, GPS, and Barometer for navigation and stability</li>
+        <li>Power Distribution & RC Receiver: Distributes power and receives pilot commands</li>
+      </ul>
+      <ul data-lang="hi" class="lang-hidden">
+        <li>फ़्लाइट कंट्रोलर बोर्ड (FCB): उड़ान नियंत्रण और सेंसर डेटा का प्रबंधन करता है</li>
+        <li>इलेक्ट्रॉनिक स्पीड कंट्रोलर (ESCs): मोटर की गति को नियंत्रित करते हैं</li>
+        <li>सेंसर: IMU, GPS और बैरोमीटर नेविगेशन और स्थिरता के लिए</li>
+        <li>पावर डिस्ट्रीब्यूशन और RC रिसीवर: पावर वितरित करता है और पायलट कमांड प्राप्त करता है</li>
+      </ul>
+      <ul data-lang="ur" class="lang-hidden">
+        <li>فلائٹ کنٹرولر بورڈ (FCB): پرواز کے کنٹرول اور سینسر ڈیٹا کا انتظام کرتا ہے</li>
+        <li>الیکٹرانک اسپیڈ کنٹرولر (ESCs): موٹر کی رفتار کو کنٹرول کرتے ہیں</li>
+        <li>سینسرز: نیویگیشن اور استحکام کے لیے IMU، GPS، اور بیرومیٹر</li>
+        <li>پاور ڈسٹریبیوشن اور RC رسیور: پاور تقسیم کرتا ہے اور پائلٹ کے احکامات وصول کرتا ہے</li>
+      </ul>
+    </section>
+
+<section>
+  <h2 data-lang="en" class="toggle" onclick="toggleSection('fcSpecs')">Flight Controller Specifications (Click to View)</h2>
+  <h2 data-lang="hi" class="toggle lang-hidden" onclick="toggleSection('fcSpecs')">फ्लाइट कंट्रोलर स्पेसिफिकेशन (देखने के लिए क्लिक करें)</h2>
+  <h2 data-lang="ur" class="toggle lang-hidden" onclick="toggleSection('fcSpecs')">فلائٹ کنٹرولر تفصیلات (دیکھنے کے لیے کلک کریں)</h2>
+  
+  <div id="fcSpecs" class="content">
+    <ul>
+      <li><strong>Microcontroller:</strong> STM32F405, ARM Cortex-M4 @ 168 MHz</li>
+      <li><strong>Firmware:</strong> ArduPilot, PX4</li>
+      <li><strong>Interfaces:</strong> UART, I2C, SPI, PWM, USB</li>
+      <li><strong>Memory:</strong> 16 MB Flash</li>
+      <li><strong>Input Voltage:</strong> 5V</li>
+      <li><strong>Dimensions:</strong> 36mm x 36mm</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2 data-lang="en" class="toggle" onclick="toggleSection('escSpecs')">ESC and Motor Specifications (Click to View)</h2>
+  <h2 data-lang="hi" class="toggle lang-hidden" onclick="toggleSection('escSpecs')">ईएससी और मोटर विवरण (देखने के लिए क्लिक करें)</h2>
+  <h2 data-lang="ur" class="toggle lang-hidden" onclick="toggleSection('escSpecs')">ESC اور موٹر تفصیلات (دیکھنے کے لیے کلک کریں)</h2>
+  
+  <div id="escSpecs" class="content">
+    <ul>
+      <li><strong>ESC:</strong> 30A continuous current, BLHeli_32 firmware, 7.4V–14.8V</li>
+      <li><strong>Motor:</strong> 2212-920KV brushless, max thrust 1200g</li>
+      <li><strong>Compatible Propellers:</strong> 9-10"</li>
+      <li><strong>PWM:</strong> Adjustable 10–490Hz</li>
+    </ul>
+  </div>
+</section>
+
+
+    <section>
+      <h2 data-lang="en">Training Modules</h2>
+      <h2 data-lang="hi" class="lang-hidden">प्रशिक्षण मॉड्यूल</h2>
+      <h2 data-lang="ur" class="lang-hidden">تربیتی ماڈیول</h2>
+      
+      <h3 data-lang="en">Pre-Flight Checks</h3>
+      <h3 data-lang="hi" class="lang-hidden">उड़ान-पूर्व जांच</h3>
+      <h3 data-lang="ur" class="lang-hidden">پرواز سے پہلے کی جانچ</h3>
+      
+      <ul data-lang="en">
+        <li>Verify voltage and sensor health</li>
+        <li>Inspect propeller tightness and RC link</li>
+      </ul>
+      <ul data-lang="hi" class="lang-hidden">
+        <li>वोल्टेज और सेंसर स्वास्थ्य सत्यापित करें</li>
+        <li>प्रोपेलर कसावट और RC लिंक का निरीक्षण करें</li>
+      </ul>
+      <ul data-lang="ur" class="lang-hidden">
+        <li>وولٹیج اور سینسر کی صحت کی تصدیق کریں</li>
+        <li>پروپیلر کی کسنگ اور RC لنک کا معائنہ کریں</li>
+      </ul>
+
+      <h3 data-lang="en">ESC Calibration</h3>
+      <h3 data-lang="hi" class="lang-hidden">ईएससी कैलिब्रेशन</h3>
+      <h3 data-lang="ur" class="lang-hidden">ESC کیلیبریشن</h3>
+      
+      <ul data-lang="en">
+        <li>Throttle range configuration</li>
+        <li>ESC timing setup</li>
+        <li>Use BLHeli_32 suite for settings</li>
+      </ul>
+      <ul data-lang="hi" class="lang-hidden">
+        <li>थ्रॉटल रेंज कॉन्फ़िगरेशन</li>
+        <li>ईएससी टाइमिंग सेटअप</li>
+        <li>सेटिंग्स के लिए BLHeli_32 सूट का उपयोग करें</li>
+      </ul>
+      <ul data-lang="ur" class="lang-hidden">
+        <li>تھروٹل رینج کنفیگریشن</li>
+        <li>ESC ٹائمنگ سیٹ اپ</li>
+        <li>سیٹنگز کے لیے BLHeli_32 سوٹ استعمال کریں</li>
+      </ul>
+
+      <h3 data-lang="en">Sensor Integration</h3>
+      <h3 data-lang="hi" class="lang-hidden">सेंसर एकीकरण</h3>
+      <h3 data-lang="ur" class="lang-hidden">سینسر انٹیگریشن</h3>
+      
+      <ul data-lang="en">
+        <li>IMU: Accelerometer, Gyroscope, Magnetometer</li>
+        <li>GPS: Coordinates & Waypoint navigation</li>
+        <li>Barometer: Altitude hold</li>
+      </ul>
+      <ul data-lang="hi" class="lang-hidden">
+        <li>IMU: एक्सेलेरोमीटर, जायरोस्कोप, मैग्नेटोमीटर</li>
+        <li>GPS: निर्देशांक और वेपॉइंट नेविगेशन</li>
+        <li>बैरोमीटर: ऊंचाई पकड़</li>
+      </ul>
+      <ul data-lang="ur" class="lang-hidden">
+        <li>IMU: ایکسلرومیٹر، جائروسکوپ، میگنیٹومیٹر</li>
+        <li>GPS: کوآرڈینیٹس اور وے پوائنٹ نیویگیشن</li>
+        <li>بیرومیٹر: اونچائی برقراری</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 data-lang="en">Software Integration</h2>
+      <h2 data-lang="hi" class="lang-hidden">सॉफ़्टवेयर एकीकरण</h2>
+      <h2 data-lang="ur" class="lang-hidden">سافٹ ویئر انضمام</h2>
+      
+      <ul data-lang="en">
+        <li><strong>Mission Planner:</strong> GUI configuration, telemetry logging, real-time data visualization</li>
+        <li><strong>ArduPilot:</strong> Open-source firmware, customizable flight parameters, large community</li>
+      </ul>
+      <ul data-lang="hi" class="lang-hidden">
+        <li><strong>मिशन प्लानर:</strong> GUI कॉन्फ़िगरेशन, टेलीमेट्री लॉगिंग, रीयल-टाइम डेटा विज़ुअलाइज़ेशन</li>
+        <li><strong>ArduPilot:</strong> ओपन-सोर्स फर्मवेयर, अनुकूलन योग्य उड़ान पैरामीटर, बड़ा समुदाय</li>
+      </ul>
+      <ul data-lang="ur" class="lang-hidden">
+        <li><strong>مشن پلانر:</strong> GUI کنفیگریشن، ٹیلی میٹری لاگنگ، ریئل ٹائم ڈیٹا ویژولائزیشن</li>
+        <li><strong>ArduPilot:</strong> اوپن سورس فرم ویئر، حسب ضرورت فلائٹ پیرامیٹرز، بڑی کمیونٹی</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 data-lang="en">Educational Value</h2>
+      <h2 data-lang="hi" class="lang-hidden">शैक्षणिक मूल्य</h2>
+      <h2 data-lang="ur" class="lang-hidden">تعلیمی قدر</h2>
+      
+      <ul data-lang="en">
+        <li><strong>Assembly & Troubleshooting:</strong> Learn UAV circuit building and issue resolution</li>
+        <li><strong>Programming & PID Tuning:</strong> Develop and fine-tune flight control algorithms</li>
+        <li><strong>Sensor Data & Analysis:</strong> Hands-on with real-time sensor data and flight dynamics</li>
+      </ul>
+      <ul data-lang="hi" class="lang-hidden">
+        <li><strong>असेंबली और समस्या निवारण:</strong> यूएवी सर्किट निर्माण और समस्या समाधान सीखें</li>
+        <li><strong>प्रोग्रामिंग और PID ट्यूनिंग:</strong> उड़ान नियंत्रण एल्गोरिदम विकसित और ठीक करें</li>
+        <li><strong>सेंसर डेटा और विश्लेषण:</strong> रीयल-टाइम सेंसर डेटा और उड़ान गतिशीलता के साथ व्यावहारिक</li>
+      </ul>
+      <ul data-lang="ur" class="lang-hidden">
+        <li><strong>اسمبلی اور ٹربل شوٹنگ:</strong> UAV سرکٹ بنانا اور مسئلے کا حل سیکھیں</li>
+        <li><strong>پروگرامنگ اور PID ٹیوننگ:</strong> فلائٹ کنٹرول الگورتھم تیار اور بہتر بنائیں</li>
+        <li><strong>سینسر ڈیٹا اور تجزیہ:</strong> ریئل ٹائم سینسر ڈیٹا اور فلائٹ ڈائنامکس کے ساتھ عملی</li>
+      </ul>
+    </section>
+  </main>
+
+<footer>
+  <p data-lang="en">
+    Developer: Akash Gupta | 
+    <a href="https://www.linkedin.com/in/saysky2" target="_blank">LinkedIn</a> | 
+    <a href="https://github.com/saysky2" target="_blank">GitHub</a>
+  </p>
+  <p data-lang="en">Under the Supervision of <strong>Dr. Shan E Fatima</strong></p>
+  <p data-lang="hi" class="lang-hidden">
+    डेवलपर: आकाश गुप्ता | 
+    <a href="https://www.linkedin.com/in/saysky2" target="_blank">LinkedIn</a> | 
+    <a href="https://github.com/saysky2" target="_blank">GitHub</a>
+  </p>
+  <p data-lang="hi" class="lang-hidden"><strong>डॉ. शान ई. फातिमा</strong> के पर्यवेक्षण में</p>
+
+  <p data-lang="ur" class="lang-hidden">
+    ڈیولپر: آکاش گپتا | 
+    <a href="https://www.linkedin.com/in/saysky2" target="_blank">LinkedIn</a> | 
+    <a href="https://github.com/saysky2" target="_blank">GitHub</a>
+  </p>
+  <p data-lang="ur" class="lang-hidden"><strong>ڈاکٹر شان ای فاطمہ</strong> کی نگرانی میں</p>
+
+</footer>
 
   <script>
-    const translations = {
-      en: {
-        title: "Scientech DN01 - FCB and ESC Training Platform",
-        systemOverview: "System Overview",
-        description: "Explore hands-on UAV electronics and control systems through a modular platform. Designed for education and experimentation, this system simplifies learning UAV technologies.",
-        fcb: "Flight Controller Board (FCB): Manages flight control and sensor data.",
-        esc: "Electronic Speed Controllers (ESCs): Regulate motor speed and ensure precise thrust control.",
-        sensors: "Sensors: IMU, GPS, and Barometer for navigation and stability.",
-        power: "Power Distribution & RC Receiver: Distributes power and receives pilot commands.",
-        fcSpecs: "Flight Controller Specifications (Click to Toggle)",
-        escSpecs: "ESC and Motor Specs (Click to Toggle)",
-        trainingModules: "Training Modules",
-        softwareIntegration: "Software Integration",
-        educationalValue: "Educational Value"
-      },
-      hi: {
-        title: "साइंटेक DN01 - एफसीबी और ईएससी प्रशिक्षण प्लेटफ़ॉर्म",
-        systemOverview: "सिस्टम अवलोकन",
-        description: "एक मॉड्यूलर प्लेटफ़ॉर्म के माध्यम से यूएवी इलेक्ट्रॉनिक्स और नियंत्रण प्रणाली का व्यावहारिक अनुभव प्राप्त करें। यह शैक्षणिक और प्रयोगात्मक उद्देश्यों के लिए डिज़ाइन किया गया है।",
-        fcb: "फ़्लाइट कंट्रोलर बोर्ड (FCB): उड़ान नियंत्रण और सेंसर डेटा का प्रबंधन करता है।",
-        esc: "इलेक्ट्रॉनिक स्पीड कंट्रोलर (ESCs): मोटर की गति को नियंत्रित करते हैं।",
-        sensors: "सेंसर: IMU, GPS और बैरोमीटर नेविगेशन और स्थिरता के लिए।",
-        power: "पावर डिस्ट्रीब्यूशन और RC रिसीवर: पावर वितरित करता है और पायलट कमांड प्राप्त करता है।",
-        fcSpecs: "फ्लाइट कंट्रोलर स्पेसिफिकेशन (क्लिक करें)",
-        escSpecs: "ईएससी और मोटर विवरण (क्लिक करें)",
-        trainingModules: "प्रशिक्षण मॉड्यूल",
-        softwareIntegration: "सॉफ़्टवेयर एकीकरण",
-        educationalValue: "शैक्षणिक मूल्य"
-      },
-      ur: {
-        title: "سائنٹیک DN01 - ایف سی بی اور ای ایس سی تربیتی پلیٹ فارم",
-        systemOverview: "نظام کا جائزہ",
-        description: "ایک ماڈیولر پلیٹ فارم کے ذریعے UAV الیکٹرانکس اور کنٹرول سسٹمز کا عملی تجربہ حاصل کریں۔ تعلیمی اور تجرباتی مقاصد کے لیے تیار کیا گیا۔",
-        fcb: "فلائٹ کنٹرولر بورڈ (FCB): پرواز کے کنٹرول اور سینسر ڈیٹا کا انتظام کرتا ہے۔",
-        esc: "الیکٹرانک اسپیڈ کنٹرولر (ESCs): موٹر کی رفتار کو کنٹرول کرتے ہیں۔",
-        sensors: "سینسرز: نیویگیشن اور استحکام کے لیے IMU، GPS، اور بیرومیٹر۔",
-        power: "پاور ڈسٹریبیوشن اور RC رسیور: پاور تقسیم کرتا ہے اور پائلٹ کے احکامات وصول کرتا ہے۔",
-        fcSpecs: "فلائٹ کنٹرولر تفصیلات (کلک کریں)",
-        escSpecs: "ESC اور موٹر تفصیلات (کلک کریں)",
-        trainingModules: "تربیتی ماڈیول",
-        softwareIntegration: "سافٹ ویئر انضمام",
-        educationalValue: "تعلیمی قدر"
-      }
-    };
-
     function toggleSection(id) {
       const section = document.getElementById(id);
       section.classList.toggle('open');
@@ -198,139 +423,33 @@
 
     function toggleDarkMode() {
       const body = document.body;
-      const button = document.getElementById("darkToggle");
-      body.classList.toggle("dark-mode");
-      button.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
+      const currentTheme = body.getAttribute('data-theme');
+      
+      if (currentTheme === 'dark') {
+        body.removeAttribute('data-theme');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+      }
     }
 
-    function changeLanguage() {
-      const lang = document.getElementById("languageSelect").value;
-      const t = translations[lang];
-      document.querySelector("h1").textContent = t.title;
-      document.getElementById("systemOverview").textContent = t.systemOverview;
-      document.getElementById("desc").textContent = t.description;
-      document.getElementById("fcb").textContent = t.fcb;
-      document.getElementById("esc").textContent = t.esc;
-      document.getElementById("sensors").textContent = t.sensors;
-      document.getElementById("power").textContent = t.power;
-      document.getElementById("fcSpecsToggle").textContent = t.fcSpecs;
-      document.getElementById("escSpecsToggle").textContent = t.escSpecs;
-      document.getElementById("trainingModules").textContent = t.trainingModules;
-      document.getElementById("softwareIntegration").textContent = t.softwareIntegration;
-      document.getElementById("educationalValue").textContent = t.educationalValue;
+    function changeLanguage(lang) {
+      // Hide all language elements
+      const allLangElements = document.querySelectorAll('[data-lang]');
+      allLangElements.forEach(element => {
+        element.classList.add('lang-hidden');
+      });
+      
+      // Show elements for selected language
+      const selectedLangElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+      selectedLangElements.forEach(element => {
+        element.classList.remove('lang-hidden');
+      });
     }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      changeLanguage('en'); // Default to English
+    });
   </script>
-</head>
-
-<body>
-
-<header>
-  <img src="Khwaja_Moinuddin_Chishti_Language_University_logo.png" alt="University Logo" class="logo">
-  <h1>Scientech DN01 - FCB and ESC Training Platform</h1>
-  <button id="darkToggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
-  <select id="languageSelect" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="hi">हिन्दी</option>
-    <option value="ur">اردو</option>
-  </select>
-</header>
-
-<main>
-
-  <img src="./DN01-FCB-and-ESC-Training-Platform.png" alt="DN01 Training Platform Image">
-
-  <section>
-    <h2 id="systemOverview">System Overview</h2>
-    <p id="desc">Explore hands-on UAV electronics and control systems through a modular platform. Designed for education and experimentation, this system simplifies learning UAV technologies.</p>
-    <ul>
-      <li id="fcb">Flight Controller Board (FCB): Manages flight control and sensor data.</li>
-      <li id="esc">Electronic Speed Controllers (ESCs): Regulate motor speed and ensure precise thrust control.</li>
-      <li id="sensors">Sensors: IMU, GPS, and Barometer for navigation and stability.</li>
-      <li id="power">Power Distribution & RC Receiver: Distributes power and receives pilot commands.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2 id="fcSpecsToggle" class="toggle" onclick="toggleSection('fcSpecs')">Flight Controller Specifications (Click to Toggle)</h2>
-    <div id="fcSpecs" class="content">
-      <ul>
-        <li><strong>Microcontroller:</strong> STM32F405, ARM Cortex-M4 @ 168 MHz</li>
-        <li><strong>Firmware:</strong> ArduPilot, PX4</li>
-        <li><strong>Interfaces:</strong> UART, I2C, SPI, PWM, USB</li>
-        <li><strong>Memory:</strong> 16 MB Flash</li>
-        <li><strong>Input Voltage:</strong> 5V</li>
-        <li><strong>Dimensions:</strong> 36mm x 36mm</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h2 id="escSpecsToggle" class="toggle" onclick="toggleSection('escSpecs')">ESC and Motor Specs (Click to Toggle)</h2>
-    <div id="escSpecs" class="content">
-      <ul>
-        <li><strong>ESC:</strong> 30A continuous current, BLHeli_32 firmware, 7.4V–14.8V</li>
-        <li><strong>Motor:</strong> 2212-920KV brushless, max thrust 1200g</li>
-        <li><strong>Compatible Propellers:</strong> 9-10"</li>
-        <li><strong>PWM:</strong> Adjustable 10–490Hz</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h2 id="trainingModules">Training Modules</h2>
-    <h3>Pre-Flight Checks</h3>
-    <ul>
-      <li>Verify voltage and sensor health</li>
-      <li>Inspect propeller tightness and RC link</li>
-    </ul>
-    <h3>ESC Calibration</h3>
-    <ul>
-      <li>Throttle range configuration</li>
-      <li>ESC timing setup</li>
-      <li>Use BLHeli_32 suite for settings</li>
-    </ul>
-    <h3>Signal Monitoring</h3>
-    <ul>
-      <li>Analyze PWM, SBUS signals</li>
-      <li>Monitor RC link quality</li>
-    </ul>
-    <h3>Sensor Integration</h3>
-    <ul>
-      <li>IMU: Accelerometer, Gyroscope, Magnetometer</li>
-      <li>GPS: Coordinates & Waypoint navigation</li>
-      <li>Barometer: Altitude hold</li>
-    </ul>
-    <h3>RC Control & Flight Modes</h3>
-    <ul>
-      <li>Transmitter setup, channel mapping</li>
-      <li>PID tuning and configuration</li>
-      <li>Flight Modes: Stabilize, AltHold, Loiter, Auto</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2 id="softwareIntegration">Software Integration</h2>
-    <ul>
-      <li><strong>Mission Planner:</strong> GUI configuration, telemetry logging, real-time data visualization</li>
-      <li><strong>ArduPilot:</strong> Open-source firmware, customizable flight parameters, large community</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2 id="educationalValue">Educational Value</h2>
-    <ul>
-      <li><strong>Assembly & Troubleshooting:</strong> Learn UAV circuit building and issue resolution</li>
-      <li><strong>Programming & PID Tuning:</strong> Develop and fine-tune flight control algorithms</li>
-      <li><strong>Sensor Data & Analysis:</strong> Hands-on with real-time sensor data and flight dynamics</li>
-    </ul>
-  </section>
-
-</main>
-<footer>
-  Developer: Akash Gupta | 
-  <a href="https://www.linkedin.com/in/saysky2" target="_blank">LinkedIn</a> | 
-  <a href="https://github.com/saysky2" target="_blank">GitHub</a>
-</footer>
-
 </body>
 </html>
